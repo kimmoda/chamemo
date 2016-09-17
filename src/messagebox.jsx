@@ -14,7 +14,6 @@ var myFirebase = firebase.initializeApp(config);
 
 var Message = React.createClass({
   render: function () {
-    var rawMarkup = converter.makeHtml();
     return (
 			<MessageBubble
 				author={this.props.author}
