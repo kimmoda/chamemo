@@ -28,19 +28,32 @@ export class DoodlePreview extends React.Component {
 		title: React.PropTypes.string.isRequired
 	}
 
+	constructor(props) {
+		super(props)
+
+		const req = {
+			url: pollsUrl + this.props.id,
+			method: 'GET',
+			headers: { 'Accept': 'application/json' }
+		}
+
+		minixhr(req, response => {
+			let doodle = JSON.parse(response)
+			let joined = doodle.participants.reduce(function (previous, current) { return previous || (current.name === this.getName()) }, false)
+			console.log(joined)
+	    this.setState({
+				joined: joined
+			})
+		})
+	}
+
 	showPoll() {
 		alert('show poll ' + this.props.id);
 	}
 
 	join() {
-    let name = localStorage.getItem('name')
-    if(!name) {
-      name = animalNames.rand()
-      this.setName(name)
-    }
-
 		const entity = {
-			"name": name,
+			"name": this.getName(),
 			"preferences": [ 1 ]
 		}
 
@@ -52,18 +65,37 @@ export class DoodlePreview extends React.Component {
 		}
 
 		minixhr(req, response => {
-			var json = JSON.parse(response);
-			alert('joined!');
+			this.setState({
+				joined: true
+			})
 		})
-
 	}
 
+  getName() {
+    let name = localStorage.getItem('name')
+    if(!name) {
+      name = animalNames.rand()
+      this.setName(name)
+    }
+    return name
+  }
+
+  setName(name) {
+    localStorage.setItem('name', name)
+  }
+
 	render() {
+		let btn = null
+		if (!this.state || !this.state.joined) {
+			btn = <DoodleActionButton text="Join" onJoin={this.join.bind(this)} />
+		}
+
 		return <div className={styles.event}>
       <a className={styles.eventDate} href={'https://www.doodle.com/poll/' + this.props.id} target="_blank">
         {moment(this.props.date).calendar()}
       </a>
-      <DoodleActionButton text="Join" onJoin={this.join.bind(this)} />
+      </span>
+			{ btn }
 		</div>
 	}
 }
