@@ -6,7 +6,6 @@ import pointOnSurface from 'turf-point-on-surface'
 function findPitches(map, point) {
   return map.queryRenderedFeatures(point, {
     layers: ['pitch_label'],
-    filter: ['in', 'class', 'pitch']
   });
 }
 
@@ -28,10 +27,10 @@ export class Map extends React.Component {
 
     const map = new MapboxGl.Map({
       container: this.container,
-      style: 'mapbox://styles/dreipol-dev/cit70esdx000u2yohtpwzu13l',
+      style: 'mapbox://styles/dreipol-dev/cit74jos9000y2yohc0gmc5pn',
       zoom: 17,
       hash: true,
-      center: [9.02728, 47.21423],
+      center: [8.987,47.223],
     });
 
     // Find most likely clicked feature and extract OSM ID
@@ -39,7 +38,7 @@ export class Map extends React.Component {
       const features = findPitches(map, e.point)
       if (!features.length) return
       const clickedFeature = features[0]
-      this.props.onPitchClick({osmId: clickedFeature.id, ...clickedFeature.properties})
+      this.props.onPitchClick(clickedFeature.properties)
     });
 
     // Indicate clickable symbols
