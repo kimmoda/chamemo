@@ -20,7 +20,7 @@ export default class App extends React.Component {
       left: 0,
       width: 300,
       padding: 20 }}>
-        <MessageBox />
+        <MessageBox osmid={200}/>
         <DoodleList />
       </div>
       <Map onPitchClick={pitch => console.log('Pitch clicked', pitch)}/>

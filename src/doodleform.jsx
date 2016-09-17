@@ -8,8 +8,8 @@ export class DoodleForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: '',
-			date: 0
+      title: 'affegsicht',
+			date: 1562053600000
     }
   }
 
@@ -28,8 +28,8 @@ export class DoodleForm extends React.Component {
 	onCreate(e) {
 		this.props.onNewDoodle(this.state.title, this.state.date)
 		this.setState({
-			title: '',
-			date: 0
+			title: 'affegsicht',
+			date: 1562053600000
 		})
 	}
 

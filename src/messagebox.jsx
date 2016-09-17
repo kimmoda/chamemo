@@ -1,8 +1,6 @@
 import React from 'react'
 import ReactFireMixin from 'reactfire'
 import firebase from 'firebase'
-import Showdown from 'showdown'
-
 
 // Initialize Firebase
 var config = {
@@ -13,7 +11,6 @@ var config = {
   messagingSenderId: "567148988576"
 };
 var myFirebase = firebase.initializeApp(config);
-var converter = new Showdown.Converter();
 
 var Message = React.createClass({
   render: function () {
@@ -32,7 +29,8 @@ var Message = React.createClass({
 var MessageList = React.createClass({
   render: function () {
     var messageNodes = this.props.data.map(function (message, index) {
-      return <Message key={index} author={message.author}>{message.text}</Message>;
+      console.log((new Date(message.timestamp)).toUTCString())
+      return <Message key={index} author={message.author} timestamp={(new Date(message.timestamp)).toUTCString()}>{message.text}</Message>;
     });
     return <div className='messageList'>{messageNodes}</div>;
   }
@@ -100,7 +98,7 @@ class MessageForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.onMessageSubmit({author: this.state.author, text: this.state.text});
+    this.props.onMessageSubmit({author: this.state.author, text: this.state.text, timestamp: {".sv": "timestamp"}});
     this.setName(this.state.author)
   }
 
@@ -145,7 +143,7 @@ export var MessageBox = React.createClass({
     // Here we bind the component to Firebase and it handles all data updates,
     // no need to poll as in the React example.
     var firebaseRef = firebase.database().ref('messageBox');
-    this.bindAsArray(firebaseRef.child('200'), 'data');
+    this.bindAsArray(firebaseRef.child(this.props.osmid), 'data');
   },
 
   render: function () {
