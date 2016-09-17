@@ -4,6 +4,7 @@ import Drawer from 'rebass/dist/Drawer'
 import Container from 'rebass/dist/Container'
 import Block from 'rebass/dist/Block'
 import Fixed from 'rebass/dist/Fixed'
+import { CommentBox } from './comment'
 
 import { Map } from './map.jsx'
 import { Chat } from './chat'
@@ -30,9 +31,19 @@ export default class App extends React.Component {
 
 	render() {
 		return <div style={{ fontFamily: theme.fontFamily, color: theme.color, fontWeight: 300 }}>
-      <Chat>
-			</Chat>
 			<DoodleList />
+      <div style={{
+      position: 'absolute',
+      backgroundColor: 'white',
+      zIndex: 1000,
+      left: 0,
+      right: 0,
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      width: 500,
+      height: 300}}>
+        <CommentBox />
+      </div>
 			<Map
 				mapStyle="mapbox://styles/mapbox/streets-v9"
 				accessToken="pk.eyJ1IjoibW9yZ2Vua2FmZmVlIiwiYSI6IjIzcmN0NlkifQ.0LRTNgCc-envt9d5MzR75w"
