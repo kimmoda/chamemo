@@ -4,9 +4,21 @@
   <meta charset="utf-8">
   <title><%= htmlWebpackPlugin.options.title %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
 </head>
 <body>
-	<div id="app">Loading...</div>
+<div id="app">Loading...</div>
+<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBk72F0DXtewljMH6EPWaJZwL5gqGr9Kp4",
+    authDomain: "chamemo-f867b.firebaseapp.com",
+    databaseURL: "https://chamemo-f867b.firebaseio.com",
+    storageBucket: "",
+    messagingSenderId: "567148988576"
+  };
+  firebase.initializeApp(config);
+</script>
 </body>
 </html>
