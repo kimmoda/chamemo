@@ -41,21 +41,18 @@ export class DoodlePreview extends React.Component {
 			let doodle = JSON.parse(response)
 			let name = this.getName()
 			let joined = doodle.participants.reduce(function (previous, current) { return previous || (current.name === name) }, false)
-			console.log(joined)
 	    this.setState({
-				joined: joined
+				joined: joined,
+				optionsHash: doodle.optionsHash
 			})
 		})
-	}
-
-	showPoll() {
-		alert('show poll ' + this.props.id);
 	}
 
 	join() {
 		const entity = {
 			"name": this.getName(),
-			"preferences": [ 1 ]
+			"preferences": [ 1 ],
+			"optionsHash": this.state.optionsHash
 		}
 
 		const req = {
