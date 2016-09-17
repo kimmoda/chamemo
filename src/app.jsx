@@ -15,7 +15,7 @@ export default class App extends React.Component {
       <div style={{
       ...fullHeight,
       boxShadow: '#ddd 2px 2px 8px 0px',
-      backgroundColor: '#f4f7f8',
+      backgroundColor: '#F2F5F8',
       zIndex: 1000,
       left: 0,
       width: 300,

@@ -17,12 +17,13 @@ var converter = new Showdown.Converter();
 
 var Message = React.createClass({
   render: function () {
-    var rawMarkup = converter.makeHtml(this.props.children.toString());
+    var rawMarkup = converter.makeHtml();
     return (
-      <div className='message'>
-        <h2 className='messageAuthor'>{this.props.author}</h2>
-        <span dangerouslySetInnerHTML={{__html: rawMarkup}}/>
-      </div>
+			<MessageBubble
+				author={this.props.author}
+				timestamp={this.props.timestamp}
+				message={this.props.children.toString()}>
+      </MessageBubble>
     );
   }
 });
@@ -37,10 +38,33 @@ var MessageList = React.createClass({
   }
 });
 
+class MessageBubble extends React.Component {
+	render() {
+		return <div>
+			<div style={{paddingBottom: 10}}>
+				<span>{this.props.author}</span>
+				<span style={{color: '#a8aab1', paddingLeft: 6}}>10:20 AM, Today</span>
+			</div>
+			<div style={{
+				padding: 7,
+				backgroundColor: '#86BB71',
+				color: 'white',
+				borderRadius: 7,
+				width: '90%',
+				marginBottom: 30,
+				lineHeight: '26px',
+			}}>
+				{this.props.message}
+			</div>
+		</div>
+	}
+}
+
 class ChatTextarea extends React.Component {
   render() {
     return <textarea
       style={{
+        fontSize: 16,
         borderRadius: 5,
         border: 'none',
         resize: 'none',
@@ -127,7 +151,6 @@ export var MessageBox = React.createClass({
   render: function () {
     return (
       <div className='messageBox'>
-        <h1>Messages</h1>
         <MessageList data={this.state.data}/>
         <MessageForm onMessageSubmit={this.handleMessageSubmit}/>
       </div>
