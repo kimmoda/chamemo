@@ -2,6 +2,7 @@ import React from 'react'
 import { DoodlePreview } from './doodlepreview'
 import { DoodleForm } from './doodleform'
 import minixhr from 'minixhr'
+import animalNames from 'node-animal'
 import ReactFireMixin from 'reactfire'
 import firebase from 'firebase'
 import reactMixin from 'react-mixin'
@@ -28,6 +29,15 @@ export class DoodleList extends React.Component {
     this.bindOsmid(this.props.osmid);
   }
 
+  getName() {
+    let name = localStorage.getItem('name')
+    if(!name) {
+      name = animalNames.rand()
+      this.setName(name)
+    }
+    return name
+  }
+
 	onNewDoodle(title, date) {
 		const doodles = this.state.doodles
 		const entity = {
@@ -37,7 +47,7 @@ export class DoodleList extends React.Component {
 			"type": "DATE",
 			"title": title,
 			"initiator": {
-				"name": "Jim Knopf",
+				"name": this.getName(),
 				"email": "h347031@mvrht.com"
 			}
 		}
@@ -46,7 +56,7 @@ export class DoodleList extends React.Component {
 			url: pollsurl,
 			method: 'POST',
 			data: JSON.stringify(entity),
-			headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'apikey': '6a0d6c3dbfbd443aa5fea58c4b612c5b' }
+			headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
 		}
 
 		minixhr(req, response => {

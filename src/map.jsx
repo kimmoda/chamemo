@@ -1,7 +1,6 @@
 import React from 'react'
 import MapboxGl from 'mapbox-gl';
 import { fullHeight } from './theme.js'
-import pointOnSurface from 'turf-point-on-surface'
 
 function findPitches(map, point) {
   return map.queryRenderedFeatures(point, {
