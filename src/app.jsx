@@ -1,37 +1,37 @@
 import React from 'react'
-
 import Drawer from 'rebass/dist/Drawer'
 import Container from 'rebass/dist/Container'
 import Block from 'rebass/dist/Block'
 import Fixed from 'rebass/dist/Fixed'
-import { CommentBox } from './comment'
+import { MessageBox } from './messagebox'
+import firebase from 'firebase'
 
 import { Map } from './map.jsx'
-import { Chat } from './chat'
 import { DoodleList } from './doodlelist'
 
 import theme from './theme.js'
 
+
 export default class App extends React.Component {
-	static childContextTypes = {
-		rebass: React.PropTypes.object,
-		reactIconBase: React.PropTypes.object
-	}
+  static childContextTypes = {
+    rebass: React.PropTypes.object,
+    reactIconBase: React.PropTypes.object
+  }
 
-	constructor(props) {
-		super(props)
-	}
+  constructor(props) {
+    super(props)
+  }
 
-	getChildContext() {
-		return {
-			rebass: theme,
-			reactIconBase: { size: 20 }
-		}
-	}
+  getChildContext() {
+    return {
+      rebass: theme,
+      reactIconBase: {size: 20}
+    }
+  }
 
-	render() {
-		return <div style={{ fontFamily: theme.fontFamily, color: theme.color, fontWeight: 300 }}>
-			<DoodleList />
+  render() {
+    return <div style={{ fontFamily: theme.fontFamily, color: theme.color, fontWeight: 300 }}>
+      <DoodleList />
       <div style={{
       position: 'absolute',
       backgroundColor: 'white',
@@ -42,9 +42,9 @@ export default class App extends React.Component {
       marginRight: 'auto',
       width: 500,
       height: 300}}>
-        <CommentBox />
+        <MessageBox />
       </div>
-			<Map onPitchClick={pitch => console.log('Pitch clicked', pitch)}/>
-		</div>
-	}
+      <Map onPitchClick={pitch => console.log('Pitch clicked', pitch)}/>
+    </div>
+  }
 }
