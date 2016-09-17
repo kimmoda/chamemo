@@ -27,7 +27,7 @@ export default class App extends React.Component {
         left: 0,
         width: 300,
         padding: 20 }}>
-        <DoodleList osmid={this.state.osmId} />
+        <DoodleList osmid={this.state.osmId} sport={this.state.sport}/>
         <hr />
         <MessageBox osmId={this.state.osmId}/>
       </div>
@@ -37,7 +37,7 @@ export default class App extends React.Component {
       {drawer}
       <Map onPitchClick={pitch => {
           console.log(pitch.osm_id)
-          this.setState({osmId: pitch.osm_id})
+          this.setState({osmId: pitch.osm_id, sport: pitch.sport})
         }
       }/>
     </div>

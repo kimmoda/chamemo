@@ -38,14 +38,14 @@ export class DoodleList extends React.Component {
     return name
   }
 
-	onNewDoodle(title, date) {
+	onNewDoodle(date) {
 		const doodles = this.state.doodles
 		const entity = {
 			"options": [
 				{ "start": date }
 			],
 			"type": "DATE",
-			"title": title,
+			"title": (this.props.sport) ? this.props.sport : 'invitation',
 			"initiator": {
 				"name": this.getName(),
 				"email": "h347031@mvrht.com"

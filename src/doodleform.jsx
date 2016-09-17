@@ -35,16 +35,9 @@ export class DoodleForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: animalNames.rand(),
 			date: 1562053600000
     }
   }
-
-	onTextChange(e) {
-		this.setState({
-			title: e.target.value
-		})
-	}
 
 	onDateChange(dateString, { dateMoment, timestamp}) {
 		console.log(dateString, dateMoment, timestamp)
@@ -55,7 +48,7 @@ export class DoodleForm extends React.Component {
 	}
 
 	onCreate(e) {
-		this.props.onNewDoodle(this.state.title, this.state.date)
+		this.props.onNewDoodle(this.state.date)
 		this.setState({
 			title: animalNames.rand(),
 			date: 1562053600000
@@ -85,7 +78,6 @@ export class DoodleForm extends React.Component {
 					weekStartDay={1}
 				/>
 			</DateField>
-			<input type="text" value={this.state.title} onChange={this.onTextChange.bind(this)} />
     	<DoodleButton text="Propose meeting" onClick={this.onCreate.bind(this)} />
 		</div>
 	}
