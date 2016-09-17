@@ -11,13 +11,7 @@ const pollsurl = 'http://localhost:3000/polls'
 export class DoodleList extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-			doodles: [
-					{ id: 'asdf', date: 1462053600000, title: 'Volleyball' },
-					{ id: 'jjjj', date: 1465053600000, title: 'Soccer' },
-					{ id: 'hello', date: 1562053600000, title: 'Volleyball' }
-				]
-		}
+    this.state = { doodles: [] }
 	}
 
   componentWillReceiveProps(nextProps) {
@@ -56,11 +50,7 @@ export class DoodleList extends React.Component {
 
 		minixhr(req, response => {
 			var json = JSON.parse(response);
-			doodles.push({ id: json.id, title: json.title, date: json.options[0].start })
-    	this.firebaseRefs['doodles'].push({id: json.id});
-			this.setState({
-				doodles: doodles
-			})
+    	this.firebaseRefs['doodles'].push({ id: json.id, title: json.title, date: json.options[0].start })
 		})
 	}
 

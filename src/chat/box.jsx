@@ -12,7 +12,7 @@ export default class MessageBox extends React.Component {
 
   constructor(props) {
     super(props);
-    this.chatRef = firebase.database().ref('messageBox')
+    this.chatRef = firebase.database().ref('chat')
     this.state = { messages: [] }
   }
 
