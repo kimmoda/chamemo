@@ -1,5 +1,6 @@
 import React from 'react'
 import 'react-date-picker/index.css'
+import animalNames from 'node-animal'
 import { DateField, DatePicker } from 'react-date-picker'
 import styles from './index.scss'
 
@@ -29,16 +30,9 @@ export class DoodleForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: 'affegsicht',
 			date: 1562053600000
     }
   }
-
-	onTextChange(e) {
-		this.setState({
-			title: e.target.value
-		})
-	}
 
 	onDateChange(dateString, { dateMoment, timestamp}) {
 		console.log(dateString, dateMoment, timestamp)
@@ -49,9 +43,9 @@ export class DoodleForm extends React.Component {
 	}
 
 	onCreate(e) {
-		this.props.onNewDoodle(this.state.title, this.state.date)
+		this.props.onNewDoodle(this.state.date)
 		this.setState({
-			title: 'affegsicht',
+			title: animalNames.rand(),
 			date: 1562053600000
 		})
 	}
@@ -78,10 +72,8 @@ export class DoodleForm extends React.Component {
 					highlightToday={true}
 					weekStartDay={1}
 				/>
-		</DateField>
-    <DoodleButton text="Propose meeting" />
-			<input type="text" value={this.state.title} onChange={this.onTextChange.bind(this)} />
-			<button type="button" onClick={this.onCreate.bind(this)}>Create</button>
+			</DateField>
+    	<DoodleButton text="Propose meeting" onClick={this.onCreate.bind(this)} />
 		</div>
 	}
 }

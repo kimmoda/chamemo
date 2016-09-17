@@ -15,7 +15,7 @@ export class DoodleDetail extends React.Component {
 		const req = {
 			url: pollsurl + this.props.id,
 			method: 'GET',
-			headers: {'Accept': 'application/json', 'apikey': '6a0d6c3dbfbd443aa5fea58c4b612c5b' }
+			headers: { 'Accept': 'application/json' }
 		}
 
 		minixhr(req, response => {

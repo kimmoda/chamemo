@@ -26,12 +26,13 @@ export default class App extends React.Component {
         zIndex: 1000,
         left: 0,
         width: 500,
-        }}>
+        }}
+      >
         <div style={{...fullHeight, padding: 10, backgroundColor: '#eef2f3', width: 230, display: 'inline-block'}}>
-        <MessageBox osmId={this.state.osmId}/>
+          <MessageBox osmId={this.state.osmId}/>
         </div>
         <div style={{...fullHeight, left: 250, padding: 10, width: 230, display: 'inline-block'}}>
-        <DoodleList osmid={this.state.osmId} />
+          <DoodleList osmid={this.state.osmId} sport={this.state.sport}/>
         </div>
       </div>
     }
@@ -40,7 +41,7 @@ export default class App extends React.Component {
       {drawer}
       <Map onPitchClick={pitch => {
           console.log(pitch.osm_id)
-          this.setState({osmId: pitch.osm_id})
+          this.setState({osmId: pitch.osm_id, sport: pitch.sport})
         }
       }/>
     </div>
