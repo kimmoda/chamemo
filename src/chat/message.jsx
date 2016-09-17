@@ -12,7 +12,7 @@ class Message extends React.Component {
 
   render() {
     const timeAgo = moment(this.props.timestamp).fromNow()
-    return <div>
+    return <div style={{ width: '90%' }}>
       <div className={styles.messageHeader}>
         <span className={styles.messageAuthor}>{this.props.author}</span>
         <span className={styles.messageDate}>{timeAgo}</span>
