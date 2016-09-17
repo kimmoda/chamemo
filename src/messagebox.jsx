@@ -2,6 +2,7 @@ import React from 'react'
 import ReactFireMixin from 'reactfire'
 import firebase from 'firebase'
 import Showdown from 'showdown'
+import reactMixin from 'react-mixin'
 
 
 // Initialize Firebase
@@ -31,8 +32,8 @@ var Message = React.createClass({
 var MessageList = React.createClass({
   render: function () {
     var messageNodes = this.props.data.map(function (message, index) {
-      console.log((new Date(message.timestamp)).toUTCString())
-      return <Message key={index} author={message.author} timestamp={(new Date(message.timestamp)).toUTCString()}>{message.text}</Message>;
+      return <Message key={index} author={message.author}
+                      timestamp={(new Date(message.timestamp)).toUTCString()}>{message.text}</Message>;
     });
     return <div className='messageList'>{messageNodes}</div>;
   }
@@ -75,28 +76,32 @@ class MessageForm extends React.Component {
 }
 
 
-export var MessageBox = React.createClass({
-  mixins: [ReactFireMixin],
+export class MessageBox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {data: []}
+  }
 
-  handleMessageSubmit: function (message) {
-    // Here we push the update out to Firebase and let ReactFire update this.state.data
+
+  componentWillReceiveProps(nextProps) {
+    this.unbind('data');
+    this.bindOsmid(nextProps.osmid);
+  }
+
+  handleMessageSubmit(message) {
     this.firebaseRefs['data'].push(message);
-  },
+  }
 
-  getInitialState: function () {
-    return {
-      data: []
-    };
-  },
 
-  componentWillMount: function () {
-    // Here we bind the component to Firebase and it handles all data updates,
-    // no need to poll as in the React example.
-    var firebaseRef = firebase.database().ref('messageBox');
-    this.bindAsArray(firebaseRef.child(this.props.osmid), 'data');
-  },
+  componentWillMount() {
+    this.bindOsmid(this.props.osmid);
+  }
 
-  render: function () {
+  bindOsmid(osmid) {
+    this.bindAsArray(firebase.database().ref('messageBox').child(osmid), 'data');
+  }
+
+  render() {
     return (
       <div className='messageBox'>
         <h1>Messages</h1>
@@ -105,6 +110,7 @@ export var MessageBox = React.createClass({
       </div>
     );
   }
-});
+}
 
 
+reactMixin(MessageBox.prototype, ReactFireMixin)

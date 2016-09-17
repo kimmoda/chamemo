@@ -10,20 +10,33 @@ import { fullHeight } from './theme.js'
 
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {osmid: null}
+  }
+
   render() {
-    return <div style={{ fontFamily: theme.fontFamily, color: theme.color, fontWeight: 300 }}>
-      <div style={{
-      ...fullHeight,
-      boxShadow: '#ddd 2px 2px 8px 0px',
-      backgroundColor: '#f4f7f8',
-      zIndex: 1000,
-      left: 0,
-      width: 300,
-      padding: 20 }}>
-        <MessageBox osmid={200}/>
+    let drawer = null
+
+    if (this.state.osmid) {
+      drawer = <div style={{
+        ...fullHeight,
+        boxShadow: '#ddd 2px 2px 8px 0px',
+        backgroundColor: '#f4f7f8',
+        zIndex: 1000,
+        left: 0,
+        width: 300,
+        padding: 20 }}>
+        <MessageBox osmid={this.state.osmid}/>
         <DoodleList />
       </div>
-      <Map onPitchClick={pitch => console.log('Pitch clicked', pitch)}/>
+    }
+    return <div style={{ fontFamily: theme.fontFamily, color: theme.color, fontWeight: 300 }}>
+      {drawer}
+      <Map onPitchClick={pitch => {
+          this.setState({osmid: pitch.osm_id});
+        }
+      }/>
     </div>
   }
 }
