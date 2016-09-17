@@ -22,7 +22,7 @@ class ChatTextarea extends React.Component {
       value={this.props.value}
       onChange={this.props.onChange}
       placeholder="Type your message"
-      rows={3}>
+      rows={2}>
     </textarea>
   }
 }

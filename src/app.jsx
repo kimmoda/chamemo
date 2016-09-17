@@ -25,11 +25,14 @@ export default class App extends React.Component {
         backgroundColor: '#F2F5F8',
         zIndex: 1000,
         left: 0,
-        width: 300,
-        padding: 20 }}>
-        <DoodleList osmid={this.state.osmId} />
-        <hr />
+        width: 500,
+        }}>
+        <div style={{...fullHeight, padding: 10, backgroundColor: '#eef2f3', width: 230, display: 'inline-block'}}>
         <MessageBox osmId={this.state.osmId}/>
+        </div>
+        <div style={{...fullHeight, left: 250, padding: 10, width: 230, display: 'inline-block'}}>
+        <DoodleList osmid={this.state.osmId} />
+        </div>
       </div>
     }
 

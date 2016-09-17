@@ -24,25 +24,12 @@ export class DoodlePreview extends React.Component {
 
 	render() {
 		return <div className={styles.event}>
-      <h3 style={{
-        paddingLeft: 8,
-        display: 'inline-block',
-        fontSize: 16,
-        fontWeight: 400,
-        color: '#888',
-        width: 137,
-        margin: 0,
-      }}>{this.props.title}</h3>
-      <span style={{
-        margin: 0,
-        paddingLeft: 8,
-        paddingRight: 8,
-        width: 116,
-        color: 'rgb(148, 194, 237)',
-      }}>
+      <span className={styles.eventDate}>
         {moment(this.props.date).calendar()}
       </span>
-      <DoodleActionButton text="Join" />
+      <div style={{float: 'right'}}>
+        <DoodleActionButton text="Join" />
+      </div>
 		</div>
 	}
 }

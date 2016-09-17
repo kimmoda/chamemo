@@ -1,6 +1,7 @@
 import React from 'react'
 import 'react-date-picker/index.css'
 import { DateField, DatePicker } from 'react-date-picker'
+import styles from './index.scss'
 
 class DoodleButton extends React.Component {
 	static propTypes = {
@@ -10,18 +11,12 @@ class DoodleButton extends React.Component {
 
   render() {
     return <button
+      className={styles.button}
       onClick={this.props.onClick}
       style={{
-        color: '#94C2ED',
-        textTransform: 'uppercase',
         display: 'block',
-        backgroundColor: '#e8eeef',
-        fontSize: '16px',
-        padding: 8,
-        borderRadius: 5,
-        marginTop: 5,
+        marginTop: 10,
         marginBottom: 20,
-        border: 'none',
       }}>{this.props.text}</button>
   }
 }

@@ -26,7 +26,7 @@ export default class MessageList extends React.Component {
     return <div
       ref={scrollDown}
       style={{
-        maxHeight: 300,
+        maxHeight: '370px',
         overflowY: 'scroll',
       }}>
     {messages}
