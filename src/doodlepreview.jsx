@@ -39,7 +39,8 @@ export class DoodlePreview extends React.Component {
 
 		minixhr(req, response => {
 			let doodle = JSON.parse(response)
-			let joined = doodle.participants.reduce(function (previous, current) { return previous || (current.name === this.getName()) }, false)
+			let name = this.getName()
+			let joined = doodle.participants.reduce(function (previous, current) { return previous || (current.name === name) }, false)
 			console.log(joined)
 	    this.setState({
 				joined: joined
