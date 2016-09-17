@@ -12,6 +12,7 @@ class DoodleActionButton extends React.Component {
   render() {
     return <button
       type="button"
+      style={{float: 'right'}}
 			onClick={this.props.onJoin}
       className={styles.button}
     >{this.props.text}</button>
@@ -62,9 +63,7 @@ export class DoodlePreview extends React.Component {
       <a className={styles.eventDate} href={'https://www.doodle.com/poll/' + this.props.id} target="_blank">
         {moment(this.props.date).calendar()}
       </a>
-      <div style={{float: 'right'}}>
-        <DoodleActionButton text="Join" onJoin={this.join.bind(this)} />
-      </div>
+      <DoodleActionButton text="Join" onJoin={this.join.bind(this)} />
 		</div>
 	}
 }

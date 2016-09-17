@@ -69,8 +69,8 @@ export class DoodleList extends React.Component {
 		var previews = this.state.doodles.map(d => <DoodlePreview key={d.id} id={d.id} title={d.title} date={d.date} />)
 		return <div>
       <h2 className={styles.title}>Get together</h2>
-			{previews}
 			<DoodleForm onNewDoodle={ this.onNewDoodle.bind(this) } />
+			{previews}
 		</div>
 	}
 }
