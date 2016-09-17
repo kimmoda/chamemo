@@ -1,10 +1,9 @@
 import React from 'react'
 import { DoodlePreview } from './doodlepreview'
 import { DoodleForm } from './doodleform'
-import client from './client'
 import minixhr from 'minixhr'
 
-const pollsurl = 'https://api.tamedia.cloud/doodle/v1/polls'
+const pollsurl = 'http://localhost:3000/polls'
 
 export class DoodleList extends React.Component {
   constructor(props) {
@@ -32,23 +31,21 @@ export class DoodleList extends React.Component {
 			}
 		}
 
-		minixhr({ url: pollsurl, method: 'OPTIONS', headers: {'apikey': '6a0d6c3dbfbd443aa5fea58c4b612c5b' } }, () => {
-			const req = {
-				url: pollsurl,
-				method: 'POST',
-				data: JSON.stringify(entity),
-				headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'apikey': '6a0d6c3dbfbd443aa5fea58c4b612c5b' }
-			}
+		const req = {
+			url: pollsurl,
+			method: 'POST',
+			data: JSON.stringify(entity),
+			headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'apikey': '6a0d6c3dbfbd443aa5fea58c4b612c5b' }
+		}
 
-			minixhr(req, response => {
-				console.log(response)
-				doodles.push({ id: response.id, title: response.title, date: response.options[0].start })
-				this.setState({
-					doodles: doodles
-				})
+		minixhr(req, response => {
+			console.log(response)
+			doodles.push({ id: response.id, title: response.title, date: response.options[0].start })
+			this.setState({
+				doodles: doodles
 			})
-
 		})
+
 	}
 
 	render() {
