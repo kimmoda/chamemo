@@ -2,7 +2,7 @@ import React from 'react'
 import ReactFireMixin from 'reactfire'
 import firebase from 'firebase'
 import reactMixin from 'react-mixin'
-
+import moment from 'moment'
 
 // Initialize Firebase
 var config = {
@@ -14,24 +14,15 @@ var config = {
 };
 var myFirebase = firebase.initializeApp(config);
 
-var Message = React.createClass({
-  render: function () {
-    return (
-      <MessageBubble
-        author={this.props.author}
-        timestamp={this.props.timestamp}
-        message={this.props.children.toString()}>
-      </MessageBubble>
-    );
-  }
-});
-
-
 var MessageList = React.createClass({
   render: function () {
     var messageNodes = this.props.data.map(function (message, index) {
-      return <Message key={index} author={message.author}
-                      timestamp={(new Date(message.timestamp)).toUTCString()}>{message.text}</Message>;
+      return <MessageBubble
+        key={index}
+        author={message.author}
+        timestamp={message.timestamp}
+        message={message.text}>
+      </MessageBubble>
     });
     return <div className='messageList'>{messageNodes}</div>;
   }
@@ -42,7 +33,7 @@ class MessageBubble extends React.Component {
     return <div>
       <div style={{paddingBottom: 10}}>
         <span>{this.props.author}</span>
-        <span style={{color: '#a8aab1', paddingLeft: 6}}>10:20 AM, Today</span>
+        <span style={{color: '#a8aab1', paddingLeft: 6}}>{moment(this.props.timestamp).fromNow()}</span>
       </div>
       <div style={{
 				padding: 7,
