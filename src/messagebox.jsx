@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactFireMixin from 'reactfire'
 import firebase from 'firebase'
+import reactMixin from 'react-mixin'
+
 
 // Initialize Firebase
 var config = {
@@ -15,10 +17,10 @@ var myFirebase = firebase.initializeApp(config);
 var Message = React.createClass({
   render: function () {
     return (
-			<MessageBubble
-				author={this.props.author}
-				timestamp={this.props.timestamp}
-				message={this.props.children.toString()}>
+      <MessageBubble
+        author={this.props.author}
+        timestamp={this.props.timestamp}
+        message={this.props.children.toString()}>
       </MessageBubble>
     );
   }
@@ -28,21 +30,21 @@ var Message = React.createClass({
 var MessageList = React.createClass({
   render: function () {
     var messageNodes = this.props.data.map(function (message, index) {
-      console.log((new Date(message.timestamp)).toUTCString())
-      return <Message key={index} author={message.author} timestamp={(new Date(message.timestamp)).toUTCString()}>{message.text}</Message>;
+      return <Message key={index} author={message.author}
+                      timestamp={(new Date(message.timestamp)).toUTCString()}>{message.text}</Message>;
     });
     return <div className='messageList'>{messageNodes}</div>;
   }
 });
 
 class MessageBubble extends React.Component {
-	render() {
-		return <div>
-			<div style={{paddingBottom: 10}}>
-				<span>{this.props.author}</span>
-				<span style={{color: '#a8aab1', paddingLeft: 6}}>10:20 AM, Today</span>
-			</div>
-			<div style={{
+  render() {
+    return <div>
+      <div style={{paddingBottom: 10}}>
+        <span>{this.props.author}</span>
+        <span style={{color: '#a8aab1', paddingLeft: 6}}>10:20 AM, Today</span>
+      </div>
+      <div style={{
 				padding: 7,
 				backgroundColor: '#86BB71',
 				color: 'white',
@@ -51,10 +53,10 @@ class MessageBubble extends React.Component {
 				marginBottom: 30,
 				lineHeight: '26px',
 			}}>
-				{this.props.message}
-			</div>
-		</div>
-	}
+        {this.props.message}
+      </div>
+    </div>
+  }
 }
 
 class ChatTextarea extends React.Component {
@@ -118,34 +120,38 @@ class MessageForm extends React.Component {
         <input type='text' onChange={e => this.setState({author: e.target.value})} value={this.state.author}/>
         <ChatTextarea onChange={e => this.setState({text: e.target.value})} value={this.state.text}/>
         <input type='hidden' value="100" ref='osmid'/>
-        <ChatSubmit text="Send" />
+        <ChatSubmit text="Send"/>
       </form>
     );
   }
 }
 
-export var MessageBox = React.createClass({
-  mixins: [ReactFireMixin],
 
-  handleMessageSubmit: function (message) {
-    // Here we push the update out to Firebase and let ReactFire update this.state.data
+export class MessageBox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {data: []}
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.unbind('data');
+    this.bindOsmid(nextProps.osmid);
+  }
+
+  handleMessageSubmit(message) {
     this.firebaseRefs['data'].push(message);
-  },
+  }
 
-  getInitialState: function () {
-    return {
-      data: []
-    };
-  },
 
-  componentWillMount: function () {
-    // Here we bind the component to Firebase and it handles all data updates,
-    // no need to poll as in the React example.
-    var firebaseRef = firebase.database().ref('messageBox');
-    this.bindAsArray(firebaseRef.child(this.props.osmid), 'data');
-  },
+  componentWillMount() {
+    this.bindOsmid(this.props.osmid);
+  }
 
-  render: function () {
+  bindOsmid(osmid) {
+    this.bindAsArray(firebase.database().ref('messageBox').child(osmid), 'data');
+  }
+
+  render() {
     return (
       <div className='messageBox'>
         <MessageList data={this.state.data}/>
@@ -153,6 +159,7 @@ export var MessageBox = React.createClass({
       </div>
     );
   }
-});
+}
 
 
+reactMixin(MessageBox.prototype, ReactFireMixin)
