@@ -2,6 +2,8 @@ import React from 'react'
 import MessageBox from './chat/box'
 import firebase from 'firebase'
 
+import ReactTooltip from 'react-tooltip'
+
 import { Map } from './map.jsx'
 import { DoodleList } from './doodlelist'
 
@@ -12,7 +14,7 @@ import { fullHeight } from './theme.js'
 export default class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { osmId: null }
+    this.state = {osmId: null}
   }
 
   render() {
