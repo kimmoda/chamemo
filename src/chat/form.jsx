@@ -10,13 +10,10 @@ class ChatTextarea extends React.Component {
 
   render() {
     return <textarea
+      className={styles.textfield}
       style={{
-        fontSize: 16,
-        borderRadius: 5,
-        border: 'none',
-        resize: 'none',
-        padding: 10,
         width: '100%',
+        marginBottom: 10,
         boxSizing: 'border-box',
       }}
       value={this.props.value}
@@ -34,6 +31,7 @@ class ChatSubmit extends React.Component {
 
   render() {
     return <button
+      style={{marginLeft: -5, padding: 8}}
       type="submit"
       className={styles.button}>{this.props.text}</button>
   }
@@ -71,9 +69,13 @@ export default class MessageForm extends React.Component {
   render() {
     return (
       <form className='messageForm' onSubmit={this.handleSubmit.bind(this)}>
-        <input type='text' onChange={e => this.setState({author: e.target.value})} value={this.state.author}/>
         <ChatTextarea onChange={e => this.setState({text: e.target.value})} value={this.state.text}/>
         <input type='hidden' value="100" ref='osmid'/>
+        <input
+          style={{display: 'inline-block', width: 120}}
+          className={styles.textfield}
+          type='text'
+          onChange={e => this.setState({author: e.target.value})} value={this.state.author} />
         <ChatSubmit text="Send"/>
       </form>
     );
