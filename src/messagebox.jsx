@@ -92,6 +92,13 @@ class ChatSubmit extends React.Component {
         color: '#94C2ED',
         textTransform: 'uppercase',
         display: 'block',
+        backgroundColor: '#e8eeef',
+        fontSize: '16px',
+        padding: 8,
+        borderRadius: 5,
+        marginTop: 5,
+        marginBottom: 20,
+        border: 'none',
       }}>{this.props.text}</button>
   }
 }
