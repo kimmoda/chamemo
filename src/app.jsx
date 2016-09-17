@@ -28,7 +28,7 @@ export default class App extends React.Component {
         width: 300,
         padding: 20 }}>
         <MessageBox osmid={this.state.osmid}/>
-        <DoodleList />
+        <DoodleList osmid={this.state.osmid} />
       </div>
     }
     return <div style={{ fontFamily: theme.fontFamily, color: theme.color, fontWeight: 300 }}>

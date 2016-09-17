@@ -2,6 +2,9 @@ import React from 'react'
 import { DoodlePreview } from './doodlepreview'
 import { DoodleForm } from './doodleform'
 import minixhr from 'minixhr'
+import ReactFireMixin from 'reactfire'
+import firebase from 'firebase'
+import reactMixin from 'react-mixin'
 
 const pollsurl = 'http://localhost:3000/polls'
 
@@ -16,6 +19,19 @@ export class DoodleList extends React.Component {
 				]
 		}
 	}
+
+  componentWillReceiveProps(nextProps) {
+    this.unbind('doodles');
+    this.bindOsmid(nextProps.osmid);
+  }
+
+  bindOsmid(osmid) {
+    this.bindAsArray(firebase.database().ref('doodleList').child(osmid), 'doodles');
+  }
+
+  componentWillMount() {
+    this.bindOsmid(this.props.osmid);
+  }
 
 	onNewDoodle(title, date) {
 		const doodles = this.state.doodles
@@ -39,13 +55,13 @@ export class DoodleList extends React.Component {
 		}
 
 		minixhr(req, response => {
-			console.log(response)
-			doodles.push({ id: response.id, title: response.title, date: response.options[0].start })
+			var json = JSON.parse(response);
+			doodles.push({ id: json.id, title: json.title, date: json.options[0].start })
+    	this.firebaseRefs['doodles'].push({id: json.id});
 			this.setState({
 				doodles: doodles
 			})
 		})
-
 	}
 
 	render() {
@@ -56,3 +72,5 @@ export class DoodleList extends React.Component {
 		</div>
 	}
 }
+
+reactMixin(DoodleList.prototype, ReactFireMixin)
