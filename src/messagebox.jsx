@@ -38,34 +38,40 @@ var MessageList = React.createClass({
 });
 
 
-var MessageForm = React.createClass({
-  handleSubmit: function (event) {
+class MessageForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {author: this.getName(), text: ''}
+  }
+
+  handleSubmit(event) {
     event.preventDefault();
-    var author = this.refs.author.value.trim();
-    var text = this.refs.text.value.trim();
+    this.props.onMessageSubmit({author: this.state.author, text: this.state.text});
+    this.setName(this.state.author)
+  }
 
-    this.refs.author.value = '';
-    this.refs.text.value = '';
 
-    this.props.onMessageSubmit({author: author, text: text});
-  },
-  getName: function () {
+  getName() {
     return localStorage.getItem('name') || "Username";
-  },
-  setName: function (name) {
-    localStorage.setItem(name, 'name')
-  },
-  render: function () {
+  }
+
+
+  setName(name) {
+    localStorage.setItem('name', name)
+  }
+
+
+  render() {
     return (
-      <form className='messageForm' onSubmit={this.handleSubmit}>
-        <input type='text' ref='author'/>
-        <input type='text' ref='text'/>
+      <form className='messageForm' onSubmit={this.handleSubmit.bind(this)}>
+        <input type='text' onChange={e => this.setState({author: e.target.value})} value={this.state.author}/>
+        <input type='text' onChange={e => this.setState({text: e.target.value})} value={this.state.text}/>
         <input type='hidden' value="100" ref='osmid'/>
         <input type='submit' value='Post'/>
       </form>
     );
   }
-});
+}
 
 
 export var MessageBox = React.createClass({
