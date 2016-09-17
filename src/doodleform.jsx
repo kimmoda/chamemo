@@ -30,7 +30,7 @@ export class DoodleForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-			date: 1562053600000
+			date: Date.now()
     }
   }
 
@@ -46,7 +46,7 @@ export class DoodleForm extends React.Component {
 		this.props.onNewDoodle(this.state.date)
 		this.setState({
 			title: animalNames.rand(),
-			date: 1562053600000
+			date: Date.now()
 		})
 	}
 
@@ -55,6 +55,7 @@ export class DoodleForm extends React.Component {
 			<DateField
 				dateFormat="YYYY-MM-DD HH:mm:ss"
 				forceValidDate={true}
+        defaultValue={Date.now()}
 				style={{
           borderColor: 'transparent',
           backgroundColor: '#e8eeef',
