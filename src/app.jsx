@@ -2,8 +2,6 @@ import React from 'react'
 import MessageBox from './chat/box'
 import firebase from 'firebase'
 
-import ReactTooltip from 'react-tooltip'
-
 import { Map } from './map.jsx'
 import { DoodleList } from './doodlelist'
 
