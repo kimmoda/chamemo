@@ -1,19 +1,19 @@
 import React from 'react'
 import minixhr from 'minixhr'
 
-const pollsurl = 'https://api.tamedia.cloud/doodle/v1/polls'
+const pollsurl = 'https://localhost:3000/polls/'
 
 export class DoodleDetail extends React.Component {
 
 	static propTypes = {
 		id: React.PropTypes.string.isRequired
 	}
-	
+
   constructor(props) {
     super(props)
 
 		const req = {
-			url: pollsurl + '/' + this.props.id,
+			url: pollsurl + this.props.id,
 			method: 'GET',
 			headers: {'Accept': 'application/json', 'apikey': '6a0d6c3dbfbd443aa5fea58c4b612c5b' }
 		}
