@@ -3,6 +3,7 @@ import ReactFireMixin from 'reactfire'
 import firebase from 'firebase'
 import reactMixin from 'react-mixin'
 import moment from 'moment'
+import animalNames from 'node-animal'
 
 // Initialize Firebase
 var config = {
@@ -115,16 +116,18 @@ class MessageForm extends React.Component {
     this.setName(this.state.author)
   }
 
-
   getName() {
-    return localStorage.getItem('name') || "Username";
+    let name = localStorage.getItem('name')
+    if(!name) {
+      name = animalNames.rand()
+      this.setName(name)
+    }
+    return name
   }
-
 
   setName(name) {
     localStorage.setItem('name', name)
   }
-
 
   render() {
     return (
