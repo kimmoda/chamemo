@@ -146,7 +146,7 @@ export class MessageBox extends React.Component {
     return (
       <div className='messageBox'>
         <MessageList data={this.state.data}/>
-        <MessageForm onMessageSubmit={this.handleMessageSubmit}/>
+        <MessageForm onMessageSubmit={this.handleMessageSubmit.bind(this)}/>
       </div>
     );
   }
