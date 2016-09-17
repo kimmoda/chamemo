@@ -20,7 +20,7 @@ var Message = React.createClass({
     var rawMarkup = converter.makeHtml(this.props.children.toString());
     return (
       <div className='message'>
-        <h2 className='messageAuthor'>{this.props.author}</h2>
+        <h2 className='messageAuthor'>{this.props.author}</h2> {this.props.timestamp}
         <span dangerouslySetInnerHTML={{__html: rawMarkup}}/>
       </div>
     );
@@ -31,7 +31,8 @@ var Message = React.createClass({
 var MessageList = React.createClass({
   render: function () {
     var messageNodes = this.props.data.map(function (message, index) {
-      return <Message key={index} author={message.author}>{message.text}</Message>;
+      console.log((new Date(message.timestamp)).toUTCString())
+      return <Message key={index} author={message.author} timestamp={(new Date(message.timestamp)).toUTCString()}>{message.text}</Message>;
     });
     return <div className='messageList'>{messageNodes}</div>;
   }
@@ -46,7 +47,7 @@ class MessageForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.onMessageSubmit({author: this.state.author, text: this.state.text});
+    this.props.onMessageSubmit({author: this.state.author, text: this.state.text, timestamp: {".sv": "timestamp"}});
     this.setName(this.state.author)
   }
 
@@ -92,7 +93,7 @@ export var MessageBox = React.createClass({
     // Here we bind the component to Firebase and it handles all data updates,
     // no need to poll as in the React example.
     var firebaseRef = firebase.database().ref('messageBox');
-    this.bindAsArray(firebaseRef.child('200'), 'data');
+    this.bindAsArray(firebaseRef.child(this.props.osmid), 'data');
   },
 
   render: function () {

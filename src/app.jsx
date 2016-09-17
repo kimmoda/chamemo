@@ -42,7 +42,7 @@ export default class App extends React.Component {
       marginRight: 'auto',
       width: 500,
       height: 300}}>
-        <MessageBox />
+        <MessageBox osmid={200}/>
       </div>
       <Map onPitchClick={pitch => console.log('Pitch clicked', pitch)}/>
     </div>
