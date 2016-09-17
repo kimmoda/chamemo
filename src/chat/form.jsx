@@ -50,6 +50,7 @@ export default class MessageForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.onMessageSubmit({author: this.state.author, text: this.state.text, timestamp: {".sv": "timestamp"}});
+    this.setState({ text: '' })
     this.setName(this.state.author)
   }
 
