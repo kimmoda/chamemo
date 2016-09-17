@@ -1,5 +1,6 @@
 import React from 'react'
 import animalNames from 'node-animal'
+import styles from '../index.scss'
 
 class ChatTextarea extends React.Component {
 	static propTypes = {
@@ -34,18 +35,7 @@ class ChatSubmit extends React.Component {
   render() {
     return <button
       type="submit"
-      style={{
-        color: '#94C2ED',
-        textTransform: 'uppercase',
-        display: 'block',
-        backgroundColor: '#e8eeef',
-        fontSize: '16px',
-        padding: 8,
-        borderRadius: 5,
-        marginTop: 5,
-        marginBottom: 20,
-        border: 'none',
-      }}>{this.props.text}</button>
+      className={styles.button}>{this.props.text}</button>
   }
 }
 

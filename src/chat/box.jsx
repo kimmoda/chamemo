@@ -4,6 +4,7 @@ import reactMixin from 'react-mixin'
 import firebase from 'firebase'
 import MessageList from './list'
 import MessageForm from './form'
+import styles from '../index.scss'
 
 export default class MessageBox extends React.Component {
 	static propTypes = {
@@ -38,6 +39,7 @@ export default class MessageBox extends React.Component {
   render() {
     return (
       <div>
+        <h2 className={styles.title}>Chat</h2>
         <MessageList messages={this.state.messages}/>
         <MessageForm onMessageSubmit={this.handleMessageSubmit.bind(this)}/>
       </div>

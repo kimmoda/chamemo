@@ -5,6 +5,7 @@ import minixhr from 'minixhr'
 import ReactFireMixin from 'reactfire'
 import firebase from 'firebase'
 import reactMixin from 'react-mixin'
+import styles from './index.scss'
 
 const pollsurl = 'http://localhost:3000/polls'
 
@@ -57,6 +58,7 @@ export class DoodleList extends React.Component {
 	render() {
 		var previews = this.state.doodles.map(d => <DoodlePreview key={d.id} id={d.id} title={d.title} date={d.date} />)
 		return <div>
+      <h2 className={styles.title}>Get together</h2>
 			{previews}
 			<DoodleForm onNewDoodle={ this.onNewDoodle.bind(this) } />
 		</div>
