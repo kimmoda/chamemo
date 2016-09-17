@@ -24,7 +24,21 @@ var MessageList = React.createClass({
         message={message.text}>
       </MessageBubble>
     });
-    return <div className='messageList'>{messageNodes}</div>;
+
+    function scrollDown(d) {
+      if(d) {
+        d.scrollTop = d.scrollHeight
+      }
+    }
+
+    return <div
+      ref={scrollDown}
+      style={{
+        maxHeight: 300,
+        overflowY: 'scroll',
+      }}>
+    {messageNodes}
+    </div>
   }
 });
 
@@ -41,7 +55,7 @@ class MessageBubble extends React.Component {
 				color: 'white',
 				borderRadius: 7,
 				width: '90%',
-				marginBottom: 30,
+				marginBottom: 10,
 				lineHeight: '26px',
 			}}>
         {this.props.message}
