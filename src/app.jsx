@@ -44,10 +44,7 @@ export default class App extends React.Component {
       height: 300}}>
         <CommentBox />
       </div>
-			<Map
-				mapStyle="mapbox://styles/mapbox/streets-v9"
-				accessToken="pk.eyJ1IjoibW9yZ2Vua2FmZmVlIiwiYSI6IjIzcmN0NlkifQ.0LRTNgCc-envt9d5MzR75w"
-			/>
+			<Map />
 		</div>
 	}
 }
