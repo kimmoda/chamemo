@@ -94,7 +94,6 @@ export class DoodlePreview extends React.Component {
       <a className={styles.eventDate} href={'https://www.doodle.com/poll/' + this.props.id} target="_blank">
         {moment(this.props.date).calendar()}
       </a>
-      </span>
 			{ btn }
 		</div>
 	}
