@@ -44,7 +44,7 @@ export default class App extends React.Component {
       height: 300}}>
         <CommentBox />
       </div>
-			<Map />
+			<Map onPitchClick={pitch => console.log('Pitch clicked', pitch)}/>
 		</div>
 	}
 }
