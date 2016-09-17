@@ -1,5 +1,5 @@
 import React from 'react'
-import { MessageBox } from './messagebox'
+import MessageBox from './chat/box'
 import firebase from 'firebase'
 
 import { Map } from './map.jsx'
@@ -11,14 +11,14 @@ import { fullHeight } from './theme.js'
 
 export default class App extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = {osmid: null}
+    super(props)
+    this.state = { osmId: null }
   }
 
   render() {
     let drawer = null
 
-    if (this.state.osmid) {
+    if (this.state.osmId !== null) {
       drawer = <div style={{
         ...fullHeight,
         boxShadow: '#ddd 2px 2px 8px 0px',
@@ -27,14 +27,16 @@ export default class App extends React.Component {
         left: 0,
         width: 300,
         padding: 20 }}>
-        <MessageBox osmid={this.state.osmid}/>
-        <DoodleList osmid={this.state.osmid} />
+        <MessageBox osmId={this.state.osmId}/>
+        <DoodleList osmid={this.state.osmId} />
       </div>
     }
-    return <div style={{ fontFamily: theme.fontFamily, color: theme.color, fontWeight: 300 }}>
+
+    return <div style={{ fontFamily: theme.fontFamily, color: '#fff'}}>
       {drawer}
       <Map onPitchClick={pitch => {
-          this.setState({osmid: pitch.osm_id});
+          console.log(pitch.osm_id)
+          this.setState({osmId: pitch.osm_id})
         }
       }/>
     </div>
