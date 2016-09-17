@@ -1,4 +1,30 @@
 import React from 'react'
+import 'react-date-picker/index.css'
+import { DateField, DatePicker } from 'react-date-picker'
+
+class DoodleButton extends React.Component {
+	static propTypes = {
+    text: React.PropTypes.string.isRequired,
+    onClick: React.PropTypes.func.isRequired,
+  }
+
+  render() {
+    return <button
+      onClick={this.props.onClick}
+      style={{
+        color: '#94C2ED',
+        textTransform: 'uppercase',
+        display: 'block',
+        backgroundColor: '#e8eeef',
+        fontSize: '16px',
+        padding: 8,
+        borderRadius: 5,
+        marginTop: 5,
+        marginBottom: 20,
+        border: 'none',
+      }}>{this.props.text}</button>
+  }
+}
 
 export class DoodleForm extends React.Component {
 	static propTypes = {
@@ -19,9 +45,11 @@ export class DoodleForm extends React.Component {
 		})
 	}
 
-	onDateChange(e) {
+	onDateChange(dateString, { dateMoment, timestamp}) {
+		console.log(dateString, dateMoment, timestamp)
+		console.log(timestamp)
 		this.setState({
-			date: e.target.value
+			date: dateMoment,
 		})
 	}
 
@@ -35,8 +63,29 @@ export class DoodleForm extends React.Component {
 
 	render() {
 		return <div>
+			<DateField
+				dateFormat="YYYY-MM-DD HH:mm:ss"
+				forceValidDate={true}
+				style={{
+          borderColor: 'transparent',
+          backgroundColor: '#e8eeef',
+          fontSize: 16,
+          borderRadius: 5,
+					color: '#444',
+				}}
+			>
+				<DatePicker
+					onChange={this.onDateChange.bind(this)}
+					navigation={true}
+					locale="en"
+					forceValidDate={true}
+					highlightWeekends={true}
+					highlightToday={true}
+					weekStartDay={1}
+				/>
+		</DateField>
+    <DoodleButton text="Propose meeting" />
 			<input type="text" value={this.state.title} onChange={this.onTextChange.bind(this)} />
-			<input type="number" value={this.state.date} onChange={this.onDateChange.bind(this)} />
 			<button type="button" onClick={this.onCreate.bind(this)}>Create</button>
 		</div>
 	}

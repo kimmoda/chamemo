@@ -24,6 +24,7 @@
     "node-animal": "0.0.1",
     "node-sass": "^3.9.2",
     "react": "^15.3.0",
+    "react-date-picker": "^5.3.28",
     "react-dom": "15.3.0",
     "react-geomicons": "^2.0.5",
     "react-icons": "^2.2.1",

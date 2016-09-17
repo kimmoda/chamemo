@@ -27,8 +27,8 @@ export default class App extends React.Component {
         left: 0,
         width: 300,
         padding: 20 }}>
-        <MessageBox osmId={this.state.osmId}/>
         <DoodleList osmid={this.state.osmId} />
+        <MessageBox osmId={this.state.osmId}/>
       </div>
     }
 
