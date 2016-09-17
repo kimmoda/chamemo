@@ -46,7 +46,7 @@ var MessageList = React.createClass({
 class MessageBubble extends React.Component {
   render() {
     return <div>
-      <div style={{paddingBottom: 10}}>
+      <div style={{paddingBottom: 5, fontSize: 12}}>
         <span>{this.props.author}</span>
         <span style={{color: '#a8aab1', paddingLeft: 6}}>{moment(this.props.timestamp).fromNow()}</span>
       </div>
