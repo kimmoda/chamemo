@@ -37,6 +37,36 @@ var MessageList = React.createClass({
   }
 });
 
+class ChatTextarea extends React.Component {
+  render() {
+    return <textarea
+      style={{
+        borderRadius: 5,
+        border: 'none',
+        resize: 'none',
+        padding: 10,
+        width: '100%',
+        boxSizing: 'border-box',
+      }}
+      value={this.props.value}
+      onChange={this.props.onChange}
+      placeholder="Type your message"
+      rows={3}>
+    </textarea>
+  }
+}
+
+class ChatSubmit extends React.Component {
+  render() {
+    return <button
+      type="submit"
+      style={{
+        color: '#94C2ED',
+        textTransform: 'uppercase',
+        display: 'block',
+      }}>{this.props.text}</button>
+  }
+}
 
 class MessageForm extends React.Component {
   constructor(props) {
@@ -65,14 +95,13 @@ class MessageForm extends React.Component {
     return (
       <form className='messageForm' onSubmit={this.handleSubmit.bind(this)}>
         <input type='text' onChange={e => this.setState({author: e.target.value})} value={this.state.author}/>
-        <input type='text' onChange={e => this.setState({text: e.target.value})} value={this.state.text}/>
+        <ChatTextarea onChange={e => this.setState({text: e.target.value})} value={this.state.text}/>
         <input type='hidden' value="100" ref='osmid'/>
-        <input type='submit' value='Post'/>
+        <ChatSubmit text="Send" />
       </form>
     );
   }
 }
-
 
 export var MessageBox = React.createClass({
   mixins: [ReactFireMixin],

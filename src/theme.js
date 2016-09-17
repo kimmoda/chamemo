@@ -56,9 +56,8 @@ const border = {
 }
 
 const dark = {
-	name: 'Dark',
 	color: colors.black,
-	fontFamily: 'Roboto, sans-serif',
+	fontFamily: 'Open Sans, sans-serif',
 	scale,
 	fontSizes,
 	colors,

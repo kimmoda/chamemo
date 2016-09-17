@@ -11,7 +11,7 @@ import { fullHeight } from './theme.js'
 
 export default class App extends React.Component {
   render() {
-    return <div style={{ fontFamily: theme.fontFamily, color: theme.color, fontWeight: 300 }}>
+    return <div style={{ fontFamily: theme.fontFamily, color: theme.color }}>
       <div style={{
       ...fullHeight,
       boxShadow: '#ddd 2px 2px 8px 0px',
