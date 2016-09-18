@@ -3,7 +3,7 @@
 Meet together to move and stay healthy. Using the Doodle API and Firebase we enable local
 people to meet and do sports together at public sport areas.
 
-![Chamemo screenshot of polls and chats](screenshot.png)
+![Chamemo screenshot of polls and chats](screenshot.gif)
 
 ## Develop
 
