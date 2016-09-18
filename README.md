@@ -1,10 +1,13 @@
-# THENAME
+# Chamemo
 
-Meet for sports.
+Meet together to move and stay healthy. Using the Doodle API and Firebase we enable local
+people to meet and do sports together at public sport areas.
+
+![Chamemo screenshot of polls and chats](screenshot.png)
 
 ## Develop
 
-**THENAME** is written in ES6 and is using [React](https://github.com/facebook/react), [Immutable.js](https://facebook.github.io/immutable-js/) and [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) for the map.
+**Chamemo** is written in ES6 and is using [React](https://github.com/facebook/react), [Immutable.js](https://facebook.github.io/immutable-js/) and [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/) for the map.
 
 Install the deps, start the dev server and open the web browser on `http://localhost:8888/`.
 
